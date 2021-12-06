@@ -25,11 +25,10 @@ jobs:
     - name: Build iOS (debug)
       run: "xcodebuild \
         -workspace ios/IOSTest.xcworkspace \
-        -UseModernBuildSystem=Yes
         -scheme IOSTest \
         clean archive \
         -sdk iphoneos \
         -configuration Debug \
-        -UseModernBuildSystem=NO \
+        -UseModernBuildSystem=YES \
         -archivePath $PWD/IOSTest \
         CODE_SIGNING_ALLOWED=NO"
