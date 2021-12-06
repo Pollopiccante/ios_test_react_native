@@ -32,3 +32,8 @@ jobs:
         -UseModernBuildSystem=YES \
         -archivePath $PWD/IOSTest \
         CODE_SIGNING_ALLOWED=NO"
+    - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: IOSTest.ipa
+          path: ios/build/
