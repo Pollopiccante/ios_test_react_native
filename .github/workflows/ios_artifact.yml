@@ -25,7 +25,7 @@ jobs:
     - name: Build iOS (debug)
       run: "xcodebuild \
         -workspace ios/IOSTest.xcworkspace \
-        -scheme IOSTEST \
+        -scheme IOSTest \
         clean archive \
         -sdk iphoneos \
         -configuration Debug \
