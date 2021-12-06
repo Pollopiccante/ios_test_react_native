@@ -31,5 +31,5 @@ jobs:
         -sdk iphoneos \
         -configuration Debug \
         -UseModernBuildSystem=NO \
-        -archivePath $PWD/MatchinitMobile \
+        -archivePath $PWD/IOSTest \
         CODE_SIGNING_ALLOWED=NO"
