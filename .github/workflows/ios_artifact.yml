@@ -24,7 +24,7 @@ jobs:
       name: Install pod dependencies
     - name: Build iOS (debug)
       run: "xcodebuild \
-        -workspace ios/IOSTEST.xcworkspace \
+        -workspace ios/IOSTest.xcworkspace \
         -scheme IOSTEST \
         clean archive \
         -sdk iphoneos \
