@@ -13,15 +13,15 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.17.0
-    - run: npm ci
-    - run: xcode-select -p
+#     - name: Use Node.js
+#       uses: actions/setup-node@v1
+#       with:
+#         node-version: 14.17.0
+#     - run: npm ci
+#     - run: xcode-select -p
     - run: pwd
       name: show path
-    - run: cd ~ && mkdir my_build_dir && cd my_build_dir && touch test_file.txt && cd ~
+    - run: cd ~ && mkdir my_build_dir && cd my_build_dir && touch test_file.txt && pwd
       name: create build dir
     - run: pwd
       name: show path again  
