@@ -35,7 +35,8 @@ jobs:
         archive \
         -project ios/IOSTest.xcodeproj \
         -scheme IOSTest \
-        -archivePath ios/IOSTest.xcarchive"
+        -archivePath ios/IOSTest.xcarchive \
+        CODE_SIGNING_ALLOWED=NO"
         
     - name: Export iOS
       run: "xcodebuild \
