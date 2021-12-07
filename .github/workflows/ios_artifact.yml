@@ -17,19 +17,27 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.17.0
+    - run: mkdir tmp && cd tmp
+    - run: mkdir build_folder
+    - run: cd ..
     - run: npm ci
     - run: xcode-select -p
     - run: pod install
       working-directory: ios
       name: Install pod dependencies
-        
-    - name: Build app
-      run: |
-          xcodebuild -workspace ios/IOSTest.xcworkspace -scheme IOSTest archive -archivePath IOSTest.xcarchive -allowProvisioningUpdates
-          xcodebuild -exportArchive -archivePath ./IOSTest.xcarchive -exportPath . -exportOptionsPlist IOSTest/Info.plist
-          mv IOSTest.ipa ../IOSTest.ipa
+    - name: Build iOS (debug)
+      run: "xcodebuild \
+        -workspace ios/IOSTest.xcworkspace \
+        -scheme IOSTest \
+        clean archive \
+        -sdk iphoneos \
+        -configuration Debug \
+        -UseModernBuildSystem=YES \
+        -archivePath $PWD/IOSTest \
+        CODE_SIGNING_ALLOWED=NO \
+        CONFIGURATION_BUILD_DIR=$PWD/tmp/build_folder/"
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:
-        name: debug_build
-        path: ios/build/
+        name: IOSTest
+        path: tmp/build_folder/
