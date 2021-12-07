@@ -22,9 +22,6 @@ jobs:
     - run: pod install
       working-directory: ios
       name: Install pod dependencies
-    - run: mkdir tmp && cd tmp
-    - run: mkdir build_folder
-    - run: cd ..
     - name: Build iOS (debug)
       run: "xcodebuild \
         -workspace ios/IOSTest.xcworkspace \
@@ -34,10 +31,9 @@ jobs:
         -configuration Debug \
         -UseModernBuildSystem=YES \
         -archivePath $PWD/IOSTest \
-        CODE_SIGNING_ALLOWED=NO \
-        CONFIGURATION_BUILD_DIR=$PWD/tmp/build_folder/"
+        CODE_SIGNING_ALLOWED=NO"
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:
         name: IOSTest
-        path: tmp/build_folder/
+        path: /Users/runner/Library/Developer/Xcode/DerivedData/*/Build/Intermediates.noindex/ArchiveIntermediates/IOSTest/InstallationBuildProductsLocation/Applications/IOSTest.app
