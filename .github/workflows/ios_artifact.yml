@@ -1,6 +1,9 @@
 name: iOS
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     branches:
       - main
@@ -19,17 +22,31 @@ jobs:
     - run: pod install
       working-directory: ios
       name: Install pod dependencies
-    - name: Build iOS (debug)
+    
+    - name: Build
       run: "xcodebuild \
-        -workspace ios/IOSTest.xcworkspace \
+        clean \
+        -project IOSTest.xcodeproj \
+        -configuration Debug 
+        -alltargets"
+        
+    - name: Archive
+      run: "xcodebuild \
+        archive \
+        -project IOSTest.xcodeproj \
         -scheme IOSTest \
-        clean archive \
-        -sdk iphoneos \
-        -configuration Debug \
-        -UseModernBuildSystem=YES \
-        CODE_SIGNING_ALLOWED=NO"
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v1
-      with:
-        name: IOSTest
-        path: ~/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+        -archivePath IOSTest.xcarchive"
+        
+    - name: Export iOS
+      run: "xcodebuild \
+        -exportArchive \
+        -archivePath IOSTest.xcarchive \
+        -exportPath IOSTest \
+        -exportFormat ipa \
+        -exportProvisioningProfile "Name of Provisioning Profile"
+    
+#     - name: Upload Artifact
+#       uses: actions/upload-artifact@v1
+#       with:
+#         name: IOSTest
+#         path: my_archive_directory/
