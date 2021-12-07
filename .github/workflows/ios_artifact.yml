@@ -1,9 +1,6 @@
 name: iOS
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     branches:
       - main
@@ -37,4 +34,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: IOSTest
-        path: /build/
+        path: /Users/runner/work/ios_test_react_native/ios_test_react_native/build/
