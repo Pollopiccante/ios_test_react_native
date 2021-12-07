@@ -26,15 +26,15 @@ jobs:
       run: "xcodebuild \
         -workspace ios/IOSTest.xcworkspace \
         -scheme IOSTest \
+        -derivedDataPath build \
         clean archive \
         -sdk iphoneos \
         -configuration Debug \
         -UseModernBuildSystem=YES \
         -archivePath $PWD/IOSTest \
-        CODE_SIGNING_ALLOWED=NO \
-        CONFIGURATION_BUILD_DIR=$PWD/IOSTest/"
+        CODE_SIGNING_ALLOWED=NO"
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:
         name: IOSTest
-        path: /ios/IOSTest/
+        path: /build/
