@@ -34,7 +34,7 @@ jobs:
       run: "xcodebuild \
         archive \
         -project ios/IOSTest.xcodeproj \
-        -scheme ios/IOSTest \
+        -scheme IOSTest \
         -archivePath ios/IOSTest.xcarchive"
         
     - name: Export iOS
