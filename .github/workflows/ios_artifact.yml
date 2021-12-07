@@ -31,9 +31,10 @@ jobs:
         -configuration Debug \
         -UseModernBuildSystem=YES \
         -archivePath $PWD/IOSTest \
-        CODE_SIGNING_ALLOWED=NO"
+        CODE_SIGNING_ALLOWED=NO \
+        CONFIGURATION_BUILD_DIR=$PWD/IOSTest/"
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:
         name: IOSTest
-        path: /Users/runner/Library/Developer/Xcode/DerivedData/*/Build/Intermediates.noindex/ArchiveIntermediates/IOSTest/InstallationBuildProductsLocation/Applications/IOSTest.app
+        path: /ios/IOSTest/
