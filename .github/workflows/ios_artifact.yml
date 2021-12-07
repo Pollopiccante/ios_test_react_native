@@ -17,14 +17,14 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.17.0
-    - run: mkdir tmp && cd tmp
-    - run: mkdir build_folder
-    - run: cd ..
     - run: npm ci
     - run: xcode-select -p
     - run: pod install
       working-directory: ios
       name: Install pod dependencies
+    - run: mkdir tmp && cd tmp
+    - run: mkdir build_folder
+    - run: cd ..
     - name: Build iOS (debug)
       run: "xcodebuild \
         -workspace ios/IOSTest.xcworkspace \
