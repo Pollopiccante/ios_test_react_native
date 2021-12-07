@@ -43,7 +43,7 @@ jobs:
         -archivePath IOSTest.xcarchive \
         -exportPath IOSTest \
         -exportFormat ipa \
-        -exportProvisioningProfile "Name of Provisioning Profile"
+        -exportProvisioningProfile 'NameProvision'"
     
 #     - name: Upload Artifact
 #       uses: actions/upload-artifact@v1
