@@ -26,22 +26,22 @@ jobs:
     - name: Build
       run: "xcodebuild \
         clean \
-        -project IOSTest.xcodeproj \
+        -project ios/IOSTest.xcodeproj \
         -configuration Debug 
         -alltargets"
         
     - name: Archive
       run: "xcodebuild \
         archive \
-        -project IOSTest.xcodeproj \
-        -scheme IOSTest \
-        -archivePath IOSTest.xcarchive"
+        -project ios/IOSTest.xcodeproj \
+        -scheme ios/IOSTest \
+        -archivePath ios/IOSTest.xcarchive"
         
     - name: Export iOS
       run: "xcodebuild \
         -exportArchive \
-        -archivePath IOSTest.xcarchive \
-        -exportPath IOSTest \
+        -archivePath ios/IOSTest.xcarchive \
+        -exportPath my_export_dir \
         -exportFormat ipa \
         -exportProvisioningProfile 'NameProvision'"
     
@@ -49,4 +49,4 @@ jobs:
 #       uses: actions/upload-artifact@v1
 #       with:
 #         name: IOSTest
-#         path: my_archive_directory/
+#         path: my_export_dir/
