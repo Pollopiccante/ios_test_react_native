@@ -23,15 +23,13 @@ jobs:
       run: "xcodebuild \
         -workspace ios/IOSTest.xcworkspace \
         -scheme IOSTest \
-        -derivedDataPath build \
         clean archive \
         -sdk iphoneos \
         -configuration Debug \
         -UseModernBuildSystem=YES \
-        -archivePath $PWD/IOSTest \
         CODE_SIGNING_ALLOWED=NO"
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:
         name: IOSTest
-        path: /Users/runner/work/ios_test_react_native/ios_test_react_native/build/Build/Intermediates.noindex/ArchiveIntermediates/IOSTest/BuildProductsPath/Debug-iphoneos/
+        path: $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
