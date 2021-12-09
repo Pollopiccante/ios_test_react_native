@@ -30,7 +30,7 @@ jobs:
       name: create build dir
     - run: pwd
       name: show path again  
-    - run: npx react-native run-ios --configuration Release -sdk iphoneos
+    - run: npx react-native run-ios --configuration Release --device
       name: Build with cli
     
     - name: Upload Artifact
