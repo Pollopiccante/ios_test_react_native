@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - cli
   workflow_dispatch:
     branches:
       - main
+      - cli
 
 jobs:
   build:
@@ -25,36 +27,9 @@ jobs:
       name: create build dir
     - run: pwd
       name: show path again  
-    - name: create exportOptions.plist
-      run: echo "<?xml version="1.0" encoding="UTF-8"?>
-        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-        <plist version="1.0">
-        <dict>
-        <key>method</key>
-        <string>ad-hoc</string>
-        <key>teamID</key>
-        <string>MatchinitTeam</string>
-        </dict>
-        </plist>" > exportOptions.plist 
-    - run: pod install
-      working-directory: ios
-      name: Install pod dependencies
-    - name: Build iOS (debug)
-      run: "xcodebuild \
-        -workspace ios/IOSTest.xcworkspace \
-        -scheme IOSTest \
-        clean archive \
-        -sdk iphoneos \
-        -configuration Debug \
-        -UseModernBuildSystem=YES \
-        -archivePath $PWD/my_build_dir/IOSTest.xcarchive \
-        CODE_SIGNING_ALLOWED=NO"
-    - name: Export ipa
-      run: "xcodebuild \
-        -exportArchive \
-        -archivePath $PWD/my_build_dir/IOSTest.xcarchive \
-        -exportOptionsPlist $PWD/exportOptions.plist \
-        -exportPath $PWD/my_build_dir"
+    - run: npx react-native run-ios --configuration Release
+      name: Build with cli
+    
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
