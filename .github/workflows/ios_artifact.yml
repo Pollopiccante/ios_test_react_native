@@ -37,4 +37,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: IOSTest
-        path: my_build_dir/
+        path: /Users/runner/Library/Developer/Xcode/DerivedData/**/Build/Products/Release-iphonesimulator/IOSTest.app
