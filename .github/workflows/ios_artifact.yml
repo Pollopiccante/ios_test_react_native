@@ -25,7 +25,32 @@ jobs:
       name: create build dir
     - run: pwd
       name: show path again  
-      
+    - name: create exportOptions.plist
+      run: echo "<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>compileBitcode</key>
+  <false/>
+  <key>method</key>
+  <string>ad-hoc</string>
+  <key>provisioningProfiles</key>
+  <dict>
+    <key>my.bundle.identifier</key>
+    <string>My Provisioning Profile Name</string>
+  </dict>
+  <key>signingCertificate</key>
+  <string>iPhone Distribution</string>
+  <key>signingStyle</key>
+  <string>manual</string>
+  <key>stripSwiftSymbols</key>
+  <true/>
+  <key>teamID</key>
+  <string>YOURTEAMID</string>
+  <key>thinning</key>
+  <string>&lt;none&gt;</string>
+</dict>
+</plist>" > exportOptions.plist 
     - run: pod install
       working-directory: ios
       name: Install pod dependencies
@@ -43,8 +68,8 @@ jobs:
       run: "xcodebuild \
         -exportArchive \
         -archivePath $PWD/my_build_dir/IOSTest.xcarchive \
+        -exportOptionsPlist $PWD/exportOptions.plist \
         -exportPath $PWD/my_build_dir"
-#         -exportOptionsPlist exportOptions.plist \
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
